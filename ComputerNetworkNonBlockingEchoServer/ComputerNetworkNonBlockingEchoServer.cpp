@@ -112,6 +112,7 @@ int __cdecl main(void)
             iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
             if (WSAGetLastError() == WSAEWOULDBLOCK) {
                 printf("Hello world in recv\n");
+                continue;
             }
             if (iResult > 0) {
                 printf("Bytes received: %d\n", iResult);
