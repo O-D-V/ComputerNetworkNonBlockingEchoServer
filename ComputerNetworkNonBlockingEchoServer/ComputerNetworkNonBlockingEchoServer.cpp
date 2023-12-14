@@ -93,6 +93,7 @@ int __cdecl main(void)
         ClientSocket = accept(ListenSocket, NULL, NULL);
         if (WSAGetLastError() == WSAEWOULDBLOCK) {
             printf("Hello world\n");
+            continue;
         }
 
         if (ClientSocket == INVALID_SOCKET) {
@@ -109,6 +110,9 @@ int __cdecl main(void)
         do {
 
             iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
+            if (WSAGetLastError() == WSAEWOULDBLOCK) {
+                printf("Hello world in recv\n");
+            }
             if (iResult > 0) {
                 printf("Bytes received: %d\n", iResult);
 
